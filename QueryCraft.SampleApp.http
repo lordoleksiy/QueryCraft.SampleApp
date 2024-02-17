@@ -1,0 +1,123 @@
+@QueryCraft.SampleApp_HostAddress = http://localhost:5041
+
+POST {{QueryCraft.SampleApp_HostAddress}}/Product
+Accept: application/json
+Content-Type: application/json
+
+{
+    "Name": {
+        "contains": "1"
+    },
+    "Price": {
+        "between": [100, 500]
+    }
+}
+
+###
+
+POST {{QueryCraft.SampleApp_HostAddress}}/Product
+Accept: application/json
+Content-Type: application/json
+
+{
+    "or": [
+        {
+            "StockQuantity": {
+                "lt": 20
+            }
+        },
+        {
+            "Description": {
+                "startswith": "This is a great"
+            }
+        }
+    ]
+}
+
+###
+POST {{QueryCraft.SampleApp_HostAddress}}/Product
+Accept: application/json
+Content-Type: application/json
+
+{
+    "not": {
+        "IsActive": {
+            "eq": true
+        }
+    }
+}
+
+
+###
+POST {{QueryCraft.SampleApp_HostAddress}}/Product
+Accept: application/json
+Content-Type: application/json
+
+{
+    "and": [
+        {
+            "ReleaseDate": {
+                "gte": "2023-01-01"
+            }
+        },
+        {
+            "or": [
+                {
+                    "Price": {
+                        "lt": 50
+                    }
+                },
+                {
+                    "StockQuantity": {
+                        "gte": 20
+                    }
+                }
+            ]
+        }
+    ]
+}
+
+###
+POST {{QueryCraft.SampleApp_HostAddress}}/Product
+Accept: application/json
+Content-Type: application/json
+
+{
+    "Price": {
+        "between": [100, 500]
+    },
+    "Description": {
+        "endswith": "Laptop!"
+    },
+    "ReleaseDate": {
+        "gte": "2022-01-01"
+    }
+}
+
+### Not supported yet
+POST {{QueryCraft.SampleApp_HostAddress}}/Product
+Accept: application/json
+Content-Type: application/json
+
+{
+    "and": [
+        {
+            "Categories": {
+                "in": ["Electronics", "Clothing"]
+            }
+        },
+        {
+            "not":
+            {
+                "Price": {
+                    "gt": 200
+                }
+            }
+        }
+    ]
+}
+
+
+
+
+
